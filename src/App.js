@@ -1,25 +1,67 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    useNavigate,
+} from 'react-router-dom';
+
+import routes from '@/routes'
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+let location = window.location
+
+const Redirect = ({ to }) => {
+    let navigate = useNavigate();
+    useEffect(() => {
+        navigate(to);
+    });
+    return null;
+};
+
+const redirectRoute = route => (
+    <Route
+        key={ route.name }
+        path={ route.path }
+        element={ <Redirect to={ route.redirects } /> }
+    />
+);
+
+const simpleRoute = route => (
+    route.redirects
+    ? redirectRoute(route)
+    : (
+        <Route
+            key={ route.name }
+            path={ route.path }
+            index={ route.index }
+            element={ <route.component { ...route } location={ location } /> }
+        />
+    )
+);
+
+const mainRoute = route => (
+    <Route 
+        key={ route.name } 
+        path={ route.path } 
+        index={ route.index }
+        element={ <route.component { ...route } location={ location } /> }
+    >
+        { route.children.map(it => simpleRoute(it)) }
+    </Route>
+);
+
+const App = () => (
+    <Router>
+        <Routes>
+        { routes.map((route, i) => ( 
+            route.children && route.component
+                ? mainRoute(route)
+                : simpleRoute(route)
+        )) }
+        </Routes>
+    </Router>
+);
 
 export default App;
