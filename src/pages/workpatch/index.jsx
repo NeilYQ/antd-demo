@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProLayout, { PageContainer, ProBreadcrumb } from '@ant-design/pro-layout';
 import { Button } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
 
-import useModel from "@/models/creater/useModel.js";
+import useModel from "@/models/creater/useModel";
 import routes from '@/routes';
 
-export default (props) => {
+import request from '@/services/request';
+
+const Workpatch = (props) => {
     console.log(props)
     
     const [ pathname, setPathname ] = useState(window.location.pathname);
     const { state, dispatch } = useModel("users");
+
+    const requestDict = async () => {
+        let res = await request(`/api/system/sys_dict`, { getResponse: true });
+        console.log("res", res)
+    };
+
+    useEffect(() => {
+        requestDict()
+    }, []);
 
     const handleAdd = () => {
         dispatch?.({ type: "add", payload: 1 });
@@ -51,3 +62,5 @@ export default (props) => {
         </div>
     );
 };
+
+export default Workpatch;

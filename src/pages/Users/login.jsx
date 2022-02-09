@@ -131,13 +131,13 @@ const Logins = () => {
                     <ProFormCheckbox noStyle name="autoLogin">
                         自动登录
                     </ProFormCheckbox>
-                    <a
+                    <div
                         style={{
                             float: 'right',
                         }}
                     >
                         忘记密码
-                    </a>
+                    </div>
                 </div>
             </LoginForm>
         </div>
