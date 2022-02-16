@@ -2,9 +2,9 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import isEqual from 'fast-deep-equal';
 import { ConfigContext } from './content.js';
-import models from './modelConfig.js';
+import models from '@/config/models';
 
-export default (namespace, updater = (model = models) => model) => {
+const useModel = (namespace, updater = (model = models) => model) => {
     
     const dispatcher = useContext(ConfigContext);
     const updaterRef = useRef(updater);
@@ -65,3 +65,5 @@ export default (namespace, updater = (model = models) => model) => {
     
     return store || {};
 };
+
+export default useModel;

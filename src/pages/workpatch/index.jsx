@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
 
 import useModel from "@/models/creater/useModel";
-import routes from '@/routes';
+import routes from '@/config/routes';
 
 import request from '@/services/request';
 

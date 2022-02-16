@@ -1,7 +1,8 @@
 
 const path = require("path");
-const WebpackBar = require("webpackbar")
+const WebpackBar = require("webpackbar");
 
+const Proxy = require("./proxy");
 
 module.exports = {
     webpack: {
@@ -14,12 +15,9 @@ module.exports = {
     },
     devServer: {
         port: 8000, // 端口配置
-        proxy: {
-            '/api': {
-                target: 'http://120.78.88.126:10050',
-                pathRewrite: { '^': '' },
-                changeOrigin: true,
-            } 
-        } 
+        proxy: Proxy
+    },
+    eslint: {
+        enable: false
     }
 };

@@ -2,7 +2,7 @@
 import { ConfigContext } from './content.js';
 import Dispatcher from './dispatcher.js';
 import Executor from './exxcutor.js';
-import models from './modelConfig.js';
+import models from '@/config/models';
 
 const dispatcher = new Dispatcher();
 

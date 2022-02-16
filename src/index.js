@@ -4,12 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import StoreProvider from '@/models/creater/provider.js';
-
 ReactDOM.render(
-    <StoreProvider>
-        <App />
-    </StoreProvider>,
+    <App />,
     document.getElementById('root')
 );
 

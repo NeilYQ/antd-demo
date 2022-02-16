@@ -8,7 +8,7 @@ function Loading({ error }) {
     return <div>loading</div>;
 }
 
-export default (compPromise) => {
+const ReactLoadable = (compPromise) => {
     return Loadable({
         loader: () => {
             // await util.sleep(1000000);
@@ -17,3 +17,5 @@ export default (compPromise) => {
         loading: Loading
     });
 };
+
+export default ReactLoadable;

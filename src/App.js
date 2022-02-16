@@ -6,7 +6,8 @@ import {
     useNavigate,
 } from 'react-router-dom';
 
-import routes from '@/routes'
+import StoreProvider from '@/models/creater/provider';
+import routes from '@/config/routes'
 
 import './App.css';
 
@@ -53,15 +54,17 @@ const mainRoute = route => (
 );
 
 const App = () => (
-    <Router>
-        <Routes>
-        { routes.map((route, i) => ( 
-            route.children && route.component
-                ? mainRoute(route)
-                : simpleRoute(route)
-        )) }
-        </Routes>
-    </Router>
+    <StoreProvider>
+        <Router>
+            <Routes>
+            { routes.map((route, i) => ( 
+                route.children && route.component
+                    ? mainRoute(route)
+                    : simpleRoute(route)
+            )) }
+            </Routes>
+        </Router>
+    </StoreProvider>
 );
 
 export default App;
